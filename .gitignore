@@ -41,7 +41,6 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-/gradle/
 /.gradle/
 /.kotlin/
 /.intellijPlatform/
