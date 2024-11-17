@@ -1,0 +1,30 @@
+<idea-plugin require-restart="true">
+    <id>rs.devlabs.gradle-project-info</id>
+    <name>Gradle Project Info</name>
+    <vendor email="iqoologic@gmail.com">Miloš Stojković</vendor>
+    <description><![CDATA[
+    Enhance your project tree view with instant visibility into key project details.
+    This plugin displays the artifact version and current Git branch directly in the project tree view.
+    Customize colors for each of these details to suit your workflow and make important information stand out at a glance.
+    Simplify version tracking and branch management, right within your IDE.
+  ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.gradle</depends>
+    <depends>org.jetbrains.plugins.gradle</depends>
+    <depends>Git4Idea</depends>
+
+    <projectListeners>
+        <listener class="rs.devlabs.gradle.project.info.GearActionDecorator"
+                  topic="com.intellij.openapi.wm.ex.ToolWindowManagerListener"/>
+    </projectListeners>
+    <extensions defaultExtensionNs="com.intellij">
+        <projectViewNodeDecorator order="last" implementation="rs.devlabs.gradle.project.info.GradleProjectVersionDecorator"/>
+        <projectViewNodeDecorator order="last" implementation="rs.devlabs.gradle.project.info.SimpleGitBranchDecorator"/>
+        <applicationService serviceImplementation="rs.devlabs.gradle.project.info.SimpleProjectInfoSettings"/>
+        <applicationConfigurable
+                instance="rs.devlabs.gradle.project.info.SimpleProjectInfoSettingsConfigurable"
+                id="SimpleProjectInfoSettings"
+                displayName="Gradle Project Info Settings"/>
+    </extensions>
+</idea-plugin>
