@@ -3,11 +3,12 @@ package rs.devlabs.gradle.project.info
 import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ProjectViewNode
 import com.intellij.ide.projectView.ProjectViewNodeDecorator
+import com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode
 import com.intellij.openapi.components.service
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.ui.SimpleTextAttributes
 import org.jetbrains.plugins.gradle.util.GradleConstants
+import java.io.File
 
 class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
 
@@ -18,9 +19,11 @@ class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
         val project = node.project ?: return
         val virtualFile = node.virtualFile ?: return
         if (!isGradleProject(virtualFile)) return
+        if (!virtualFile.isDirectory) return
 
-        if (Utils.isProjectRoot(node.project, virtualFile)) {
-            val version = getGradleProjectVersion(project)
+        if (node is PsiDirectoryNode) {
+            val version = getGradleProjectVersion(virtualFile)
+            println("${virtualFile.name} : $version")
             version?.let {
                 presentation.clearText()
 
@@ -31,11 +34,14 @@ class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
                     SimpleTextAttributes.REGULAR_ATTRIBUTES.fgColor
                 ))
                 // project.name
-                presentation.addText(
-                    " [${project.name}]", SimpleTextAttributes(
-                        SimpleTextAttributes.STYLE_BOLD,
-                        SimpleTextAttributes.REGULAR_ATTRIBUTES.fgColor
-                    ))
+                if (!virtualFile.parent.isDirectory) {// if not multi-module project
+                    presentation.addText(
+                        " [${project.name}]", SimpleTextAttributes(
+                            SimpleTextAttributes.STYLE_BOLD,
+                            SimpleTextAttributes.REGULAR_ATTRIBUTES.fgColor
+                        )
+                    )
+                }
                 // version
                 presentation.addText(" v$it", SimpleTextAttributes(
                     SimpleTextAttributes.STYLE_PLAIN,
@@ -45,20 +51,14 @@ class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
         }
     }
 
-    private fun isGradleProject(virtualFile: VirtualFile): Boolean {
-        return virtualFile.findChild("build.gradle.kts") != null || virtualFile.findChild("build.gradle") != null
-        return virtualFile.findChild(GradleConstants.KOTLIN_DSL_SCRIPT_NAME) != null || virtualFile.findChild(GradleConstants.DEFAULT_SCRIPT_NAME) != null
-    }
-
-    private fun getGradleProjectVersion(project: Project): String? {
-        val projectDir = project.basePath?.let { java.io.File(it) } ?: return null
-
+    private fun getGradleProjectVersion(virtualFile: VirtualFile): String? {
         // Try both Kotlin and Groovy build files
         val buildFiles = listOf(
-            java.io.File(projectDir, GradleConstants.KOTLIN_DSL_SCRIPT_NAME),
-            java.io.File(projectDir, GradleConstants.DEFAULT_SCRIPT_NAME)
+            File(virtualFile.path, GradleConstants.KOTLIN_DSL_SCRIPT_NAME),
+            File(virtualFile.path, GradleConstants.DEFAULT_SCRIPT_NAME)
         )
 
+        println("FILES: $buildFiles")
         for (buildFile in buildFiles) {
             if (buildFile.exists()) {
                 try {
@@ -81,5 +81,12 @@ class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
             }
         }
         return null
+    }
+
+    private fun isGradleProject(virtualFile: VirtualFile): Boolean {
+        return virtualFile.findChild(GradleConstants.KOTLIN_DSL_SCRIPT_NAME) != null ||
+                virtualFile.findChild(GradleConstants.DEFAULT_SCRIPT_NAME) != null ||
+                virtualFile.findChild(GradleConstants.KOTLIN_DSL_SETTINGS_FILE_NAME) != null ||
+                virtualFile.findChild(GradleConstants.SETTINGS_FILE_NAME) != null
     }
 }

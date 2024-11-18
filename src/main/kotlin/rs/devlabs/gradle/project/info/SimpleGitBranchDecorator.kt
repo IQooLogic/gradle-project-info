@@ -27,7 +27,7 @@ class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
         val project = node.project ?: return
         val virtualFile = node.virtualFile ?: return
 
-        if (!Utils.isProjectRoot(node.project, virtualFile)) return
+//        if (!Utils.isProjectRoot(node.project, virtualFile)) return
         if (!virtualFile.isDirectory) return
         if (!isGitRepository(project, virtualFile)) return
 
