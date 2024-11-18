@@ -1,4 +1,4 @@
-<idea-plugin require-restart="true">
+<idea-plugin>
     <id>rs.devlabs.gradle-project-info</id>
     <name>Gradle Project Info</name>
     <vendor email="iqoologic@gmail.com">Miloš Stojković</vendor>
@@ -11,20 +11,20 @@
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.gradle</depends>
-    <depends>org.jetbrains.plugins.gradle</depends>
+<!--    <depends>org.jetbrains.plugins.gradle</depends>-->
     <depends>Git4Idea</depends>
 
     <projectListeners>
-        <listener class="rs.devlabs.gradle.project.info.GearActionDecorator"
+        <listener class="rs.devlabs.gradle.project.info.GradleGearActionDecorator"
                   topic="com.intellij.openapi.wm.ex.ToolWindowManagerListener"/>
     </projectListeners>
     <extensions defaultExtensionNs="com.intellij">
         <projectViewNodeDecorator order="last" implementation="rs.devlabs.gradle.project.info.GradleProjectVersionDecorator"/>
-        <projectViewNodeDecorator order="last" implementation="rs.devlabs.gradle.project.info.SimpleGitBranchDecorator"/>
-        <applicationService serviceImplementation="rs.devlabs.gradle.project.info.SimpleProjectInfoSettings"/>
+        <projectViewNodeDecorator order="last" implementation="rs.devlabs.gradle.project.info.GradleSimpleGitBranchDecorator"/>
+        <applicationService serviceImplementation="rs.devlabs.gradle.project.info.GradleProjectInfoSettings"/>
         <applicationConfigurable
-                instance="rs.devlabs.gradle.project.info.SimpleProjectInfoSettingsConfigurable"
-                id="SimpleProjectInfoSettings"
+                instance="rs.devlabs.gradle.project.info.GradleProjectInfoSettingsConfigurable"
+                id="GradleProjectInfoSettings"
                 displayName="Gradle Project Info Settings"/>
     </extensions>
 </idea-plugin>

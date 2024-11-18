@@ -19,7 +19,6 @@ dependencies {
         intellijIdeaCommunity("2024.1.7")
         bundledPlugins(
             "com.intellij.gradle",
-            "org.jetbrains.plugins.gradle",
             "Git4Idea"
         )
         pluginVerifier()
@@ -34,7 +33,7 @@ intellijPlatform {
     pluginConfiguration {
         ideaVersion {
             sinceBuild = "233"
-            untilBuild = "242.*"
+            untilBuild = "243.*"
         }
 //        changeNotes = """
 //            <ul>

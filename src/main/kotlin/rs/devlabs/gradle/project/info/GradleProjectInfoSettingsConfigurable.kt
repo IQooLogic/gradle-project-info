@@ -13,9 +13,9 @@ import com.intellij.ui.dsl.builder.panel
 import java.awt.Color
 import javax.swing.JComponent
 
-class SimpleProjectInfoSettingsConfigurable : Configurable {
+class GradleProjectInfoSettingsConfigurable : Configurable {
     private var settingsPanel: DialogPanel? = null
-    private val settings = service<SimpleProjectInfoSettings>()
+    private val settings = service<GradleProjectInfoSettings>()
     // Store initial values as properties
     private var initialState = SettingsState()
 

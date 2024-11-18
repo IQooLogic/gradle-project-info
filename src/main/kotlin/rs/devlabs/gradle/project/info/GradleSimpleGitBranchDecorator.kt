@@ -12,9 +12,9 @@ import git4idea.GitUtil
 import git4idea.branch.GitBranchUtil
 import git4idea.repo.GitRepository
 
-class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
+class GradleSimpleGitBranchDecorator : ProjectViewNodeDecorator {
 
-    private val settings = service<SimpleProjectInfoSettings>()
+    private val settings = service<GradleProjectInfoSettings>()
 
     override fun decorate(
         node: ProjectViewNode<*>?,
@@ -27,7 +27,6 @@ class SimpleGitBranchDecorator : ProjectViewNodeDecorator {
         val project = node.project ?: return
         val virtualFile = node.virtualFile ?: return
 
-//        if (!Utils.isProjectRoot(node.project, virtualFile)) return
         if (!virtualFile.isDirectory) return
         if (!isGitRepository(project, virtualFile)) return
 

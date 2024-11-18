@@ -6,8 +6,8 @@ import com.intellij.openapi.actionSystem.ToggleAction
 import com.intellij.openapi.components.service
 import kotlinx.coroutines.Runnable
 
-class ToggleShowSimpleProjectInfoSettingsAction : ToggleAction("Toggle Gradle Project Info") {
-    private val settings = service<SimpleProjectInfoSettings>()
+class ToggleShowGradleProjectInfoSettingsAction : ToggleAction("Toggle Gradle Project Info") {
+    private val settings = service<GradleProjectInfoSettings>()
     private var onUpdateListener: Runnable = Runnable {}
 
     override fun isSelected(p0: AnActionEvent): Boolean {

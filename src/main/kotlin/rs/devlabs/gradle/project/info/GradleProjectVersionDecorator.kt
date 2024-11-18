@@ -12,7 +12,7 @@ import java.io.File
 
 class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
 
-    private val settings = service<SimpleProjectInfoSettings>()
+    private val settings = service<GradleProjectInfoSettings>()
 
     override fun decorate(node: ProjectViewNode<*>, presentation: PresentationData) {
         if (!settings.showProjectVersion || !settings.enabled) return
@@ -23,7 +23,6 @@ class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
 
         if (node is PsiDirectoryNode) {
             val version = getGradleProjectVersion(virtualFile)
-            println("${virtualFile.name} : $version")
             version?.let {
                 presentation.clearText()
 
@@ -58,7 +57,6 @@ class GradleProjectVersionDecorator  : ProjectViewNodeDecorator {
             File(virtualFile.path, GradleConstants.DEFAULT_SCRIPT_NAME)
         )
 
-        println("FILES: $buildFiles")
         for (buildFile in buildFiles) {
             if (buildFile.exists()) {
                 try {
