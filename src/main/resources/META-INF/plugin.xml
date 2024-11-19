@@ -14,10 +14,23 @@
 <!--    <depends>org.jetbrains.plugins.gradle</depends>-->
     <depends>Git4Idea</depends>
 
-    <projectListeners>
-        <listener class="rs.devlabs.gradle.project.info.GradleGearActionDecorator"
-                  topic="com.intellij.openapi.wm.ex.ToolWindowManagerListener"/>
-    </projectListeners>
+    <actions>
+        <group id="rs.devlabs.gradle.project.info.ProjectInfoCustomGroup"
+               text="Gradle Info"
+               popup="true">
+
+            <action id="rs.devlabs.gradle.project.info.ToggleShowGradleProjectInfoSettingsAction"
+                    class="rs.devlabs.gradle.project.info.ToggleShowGradleProjectInfoSettingsAction"
+                    text="Toggle Gradle Project Info"
+                    description="Toggle gradle project info"/>
+
+<!--            <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"-->
+<!--                          anchor="before"-->
+<!--                          relative-to-action="ProjectView.ToolWindow.Appearance.Actions"/>-->
+            <add-to-group group-id="ProjectView.ToolWindow.SecondaryActions"
+                          anchor="first"/>
+        </group>
+    </actions>
     <extensions defaultExtensionNs="com.intellij">
         <projectViewNodeDecorator order="last" implementation="rs.devlabs.gradle.project.info.GradleProjectVersionDecorator"/>
         <projectViewNodeDecorator order="last" implementation="rs.devlabs.gradle.project.info.GradleSimpleGitBranchDecorator"/>
