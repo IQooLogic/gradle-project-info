@@ -38,6 +38,7 @@
         <applicationConfigurable
                 instance="rs.devlabs.gradle.project.info.GradleProjectInfoSettingsConfigurable"
                 id="GradleProjectInfoSettings"
-                displayName="Gradle Project Info Settings"/>
+                displayName="Gradle Project Info Settings"
+                groupId="tools"/>
     </extensions>
 </idea-plugin>
