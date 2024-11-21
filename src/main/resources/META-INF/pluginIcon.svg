@@ -1,10 +1,17 @@
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background -->
-    <rect x="0" y="0" width="40" height="40" rx="8" fill="#F2F2F2"/>
+    <defs>
+    <!-- Subtle border gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#DFE1E5"/>
+        <stop offset="100%" style="stop-color:#E6E7EA"/>
+    </linearGradient>
+    </defs>
+        <!-- Background -->
+        <rect x="2" y="2" width="36" height="36" rx="8" fill="#F2F2F2" stroke="url(#borderGrad)"/>
 
-    <!-- Project layers -->
-    <path d="M10 12l10 5l10-5l-10-5z" fill="#087CFA"/>
-    <path d="M10 17l10 5l10-5" fill="none" stroke="#087CFA" stroke-width="1.5" opacity="0.9"/>
-    <path d="M10 22l10 5l10-5" fill="none" stroke="#087CFA" stroke-width="1.5" opacity="0.7"/>
-    <path d="M10 27l10 5l10-5" fill="none" stroke="#087CFA" stroke-width="1.5" opacity="0.5"/>
+        <!-- Project layers -->
+        <path d="M10 12l10 5l10-5l-10-5z" fill="#087CFA"/>
+        <path d="M10 17l10 5l10-5" fill="none" stroke="#087CFA" stroke-width="1.5" opacity="0.9"/>
+        <path d="M10 22l10 5l10-5" fill="none" stroke="#087CFA" stroke-width="1.5" opacity="0.7"/>
+        <path d="M10 27l10 5l10-5" fill="none" stroke="#087CFA" stroke-width="1.5" opacity="0.5"/>
 </svg>
