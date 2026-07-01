@@ -24,7 +24,8 @@ dependencies {
         bundledPlugins(
             "com.intellij.java",
             "org.jetbrains.idea.maven",
-            "Git4Idea"
+            "Git4Idea",
+            "com.intellij.gradle"
         )
         pluginVerifier()
     }
@@ -42,6 +43,7 @@ intellijPlatform {
         changeNotes = """
             <ul>
             <li>compatibility with IntelliJ IDEA Ultimate 2026.1</li>
+            <li>fixed android studio not showing version</li>
             </ul>
         """.trimIndent()
     }
