@@ -1,11 +1,13 @@
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+
 plugins {
-    id("java")
-    id("org.jetbrains.intellij.platform") version "2.1.0"
-    kotlin("jvm") version "2.0.21"
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.intellij.platform")
+    id("org.jetbrains.changelog")
 }
 
 group = "rs.devlabs"
-version = "1.0.4"
+version = "1.0.5"
 
 repositories {
     mavenCentral()
@@ -16,13 +18,15 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2024.1.7")
+        intellijIdea("2026.1.3")
+//        androidStudio("")
+        testFramework(TestFrameworkType.Platform)
         bundledPlugins(
-            "com.intellij.gradle",
+            "com.intellij.java",
+            "org.jetbrains.idea.maven",
             "Git4Idea"
         )
         pluginVerifier()
-        instrumentationTools()
     }
 }
 
@@ -37,8 +41,7 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
-            <li>light icon has border now</li>
-            <li>updated idea version compatibility ('Until Build' setting)</li>
+            <li>compatibility with IntelliJ IDEA Ultimate 2026.1</li>
             </ul>
         """.trimIndent()
     }
