@@ -44,6 +44,7 @@ intellijPlatform {
             <ul>
             <li>compatibility with IntelliJ IDEA Ultimate 2026.1</li>
             <li>fixed android studio not showing version</li>
+            <li>fixed toggle action visibility in project view menus</li>
             </ul>
         """.trimIndent()
     }
